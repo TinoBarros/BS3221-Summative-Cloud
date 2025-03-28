@@ -12,7 +12,7 @@ const db = mysql.createPool({
     connectionLimit : 10,
     host : 'localhost',
     user : 'root',
-    password : 'SummativeTest123', //or TestSErver2, SummativeTest123
+    password : 'TestSErver2', //or TestSErver2, SummativeTest123
     database : 'fire_warden'
 });
 
