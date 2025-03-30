@@ -1,57 +1,112 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const { sql, poolPromise} = require('./db');
+const { pool } = require('mssql');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
-const db = mysql.createPool({
-    connectionLimit : 10,
-    host : 'localhost',
-    user : 'root',
-    password : 'TestSErver2', //or TestSErver2, SummativeTest123
-    database : 'fire_warden'
-});
-
-app.post('/clocking', (req, res) => {
-    const staffNumber = req.body.staffNumber;
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const workingLocation = req.body.workingLocation
-    db.query("INSERT INTO clocking (staffNumber, firstName, lastName, workingLocation) VALUES (?,?,?,?)", [staffNumber, firstName, lastName, workingLocation], (err, result) => {
-        if (err) {
-            console.log(err)
-        } else {
-            res.send({name: firstName})
-        }
-    })
+app.post('/clocking', async (req, res) => {
+    try{
+        const { staffNumber, firstName, lastName, workingLocation } = req.body;
+        const pool = await poolPromise
+        await pool.request()
+            .input('staffNumber', sql.Int, staffNumber)
+            .input('firstName', sql.NVarChar, firstName)
+            .input('lastName', sql.NVarChar, lastName)
+            .input('workingLocation', sql.NVarChar, workingLocation)
+            .query("INSERT INTO clocking (staffNumber, firstName, lastName, workingLocation) VALUES (@staffNumber,@firstName,@lastName,@workingLocation)")
+     
+        res.status(200).send({ message: 'Clocking record inserted'})
+    } catch (err) {
+        console.error(err)
+        res.status(500).send({ error: 'Database Error'})
+    }
 })
 
-app.get('/clockings', (req,res) => {
-    db.query('SELECT * FROM clocking', (err, result) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send({ error: 'Database Error' });
-        } else {
-            res.json(result);
-        }
-    })
+app.post('/update', async (req,res) => {
+    const { clockingId, staffNumber, firstName, lastName, workingLocation, clockingTime } = req.body
+    const formattedClockingTime = new Date(clockingTime).toISOString().slice(0,19).replace('T', ' ')
+
+    try{
+        const pool = await poolPromise
+        const result = await pool.request()
+            .input('firstName', sql.NVarChar, firstName)
+            .input('lastName', sql.NVarChar, lastName)
+            .input('workingLocation', sql.NVarChar, workingLocation)
+            .input('staffNumber', sql.Int, staffNumber)
+            .input('clockingTime', sql.DateTime, formattedClockingTime)
+            .input('clockingId', sql.Int, clockingId)
+            .query('UPDATE clocking SET firstName = @firstName, lastName = @lastName, workingLocation = @workingLocation, staffNumber = @staffNumber, clockingTime = @clockingTime WHERE clockingId = @clockingId')
+
+        res.status(200).send(result)
+    } catch (err) {
+        console.error(err)
+        res.status(500).send({ error: 'Database Error'})
+    }
+    
+ })
+
+
+app.post('/delete', async (req, res) => {
+    const { clockingId } = req.body
+
+    try {
+        const pool = await poolPromise
+        const result = await pool.request()
+            .input('clockingId', sql.Int, clockingId)
+            .query('DELETE FROm clocking WHERE clockingId = @clockingId')
+
+        res.status(200).send(result)
+    } catch (err) {
+        console.error(err)
+        res.status(500).send({ error: 'Database Error'})
+    } 
 })
 
-app.get('/locations', (req,res) => {
-    db.query('SELECT Name FROM locations', (err, result) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send({ error: 'Database Error' });
-        } else {
-            res.json(result);
-        }
-    })
+
+app.get('/clockings', async (req,res) => {
+   try{
+    const pool = await poolPromise;
+    const result = await pool.request().query('SELECT * FROM clocking')
+    res.json(result.recordset)
+   } catch (err) {
+    console.log(err)
+    res.status(500).send({ error: 'Database Error'})
+   }
+})
+
+app.get('/edit/:id', async (req, res) => {
+    const clockingId = req.params.id;
+
+    try{
+        const pool = await poolPromise
+        const result = await pool.request()
+            .input('clockingId', sql.Int, clockingId)
+            .query('SELECT * FROM clocking WHERE clockingId = @clockingId')
+
+        res.json(result.recordset)
+    } catch (err) {
+        console.error(err)
+        res.status(500).send({ error: 'Database Error' })
+    }
+    
+})
+
+app.get('/locations', async (req,res) => {
+    try {
+        const pool = await poolPromise
+        const result = await pool.request().query('SELECT Name FROM locations')
+        res.json(result.recordset)
+    } catch (err) {
+        console.error(err)
+        res.status(500).send({ error: 'Database Error' })
+    }
 })
 
 app.listen(8080, () => {
-    console.log('server listening on port 8080 -with db');
+    console.log('server listening on port 8080');
 })

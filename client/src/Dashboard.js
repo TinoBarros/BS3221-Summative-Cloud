@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
     const [clockings, setClockings] = useState([]);
-    const [selected, setSelected] = useState(new Set());
+    const [selected, setSelected] = useState(null);
     const [page, setPage] = useState(0);
     const [rowsPerPage] = useState(5);
 
@@ -27,15 +27,7 @@ const Dashboard = () => {
     }, []);
 
     const selectHandler = (clockingId) => {
-      setSelected((prevSelected) => {
-        const newSelected = new Set(prevSelected);
-        if (newSelected.has(clockingId)) {
-          newSelected.delete(clockingId)
-        } else {
-          newSelected.add(clockingId)
-        }
-        return newSelected
-      })
+      setSelected((prevSelected) => (prevSelected === clockingId ? null: clockingId))
     };
 
     const pageChangeHandler = (event, newPage) => {
@@ -47,12 +39,12 @@ const Dashboard = () => {
       return (
         <div className='flex justify-end py-10'>
           <Link
-            to={selected.size === 1 ? `/edit/${Array.from(selected)[0]}` : '#'}
+            to={selected ? `/edit/${selected}` : '#'}
             style={{textDecordation: 'none'}}
           >
             <Button
               variant='contained' 
-              disabled={selected.size !== 1} 
+              disabled={!selected} 
               sx={{
                 backgroundColor: '#552d67',
                 '&:hover' : {backgroundColor: '#452354'}
@@ -70,7 +62,7 @@ const Dashboard = () => {
         <div className='flex justify-end py-10'>
             <Button
               variant='contained' 
-              disabled={selected.size !== 1} 
+              disabled={!selected} 
               onClick={deleteHandler}
               sx={{
                 backgroundColor: '#552d67',
@@ -84,7 +76,14 @@ const Dashboard = () => {
     }
 
     const deleteHandler = () => {
-
+      if (selected) {
+      axios.post('http://localhost:8080/delete', { clockingId: selected })
+      .then(() => {
+        setClockings(clockings.filter(clocking => clocking.clockingId !== selected))
+        setSelected(null)
+      })
+      .catch(error => console.error("Error Deleting Clocking:", error))
+      }
     }
 
     const dateFormatter = (dateString) => {
@@ -123,7 +122,7 @@ const Dashboard = () => {
               >
                 <TableCell>
                   <Checkbox 
-                    checked={selected.has(row.clockingId)} 
+                    checked={selected === row.clockingId} 
                     onChange={() => selectHandler(row.clockingId)}
                     sx={{
                       color: '#552d67',
@@ -143,6 +142,7 @@ const Dashboard = () => {
         <TablePagination
           component="div"
           count={clockings.length}
+          rowsPerPageOptions={rowsPerPage}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={pageChangeHandler}

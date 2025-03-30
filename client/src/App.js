@@ -39,7 +39,7 @@ function App() {
 
   
 
-  const submitHandler = e => { //552d67
+  const submitHandler = e => {
     e.preventDefault();
     if (!staffNumber.trim() || !firstName.trim() || !lastName.trim() || !workingLocation.trim()) {
       alert("Please fill in all required fields.");
@@ -115,7 +115,7 @@ function App() {
           </div>
           <div className="actions">
             <button 
-              className="px-5 py-1 rounded-sm bg-purple-600 hover:bg-purple-700 text-white"
+              className="px-5 py-1 rounded-sm bg-[#552d67] hover:bg-[#452354] text-white"
               onClick={() => { close(); setFormSubmitted(false); }}
             >
               Back
