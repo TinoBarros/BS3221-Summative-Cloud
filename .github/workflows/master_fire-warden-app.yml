@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app  # Artifact name
-          path: server/     # Ensure you're uploading the entire server folder
+          path: ./server/     # Ensure you're uploading the entire server folder
 
   deploy:
     runs-on: ubuntu-latest
