@@ -73,5 +73,5 @@ jobs:
         with:
           app-name: 'fire-warden-app'
           slot-name: 'Production'
-          package: './server/'  # The 'server' folder should be used during deployment
+          package: '.'  # The 'server' folder should be used during deployment
           
