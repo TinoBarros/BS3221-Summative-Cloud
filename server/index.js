@@ -9,6 +9,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+    res.send('test');
+});
 
 app.post('/clocking', async (req, res) => {
     try{
