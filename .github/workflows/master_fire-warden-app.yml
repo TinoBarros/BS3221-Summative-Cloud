@@ -15,7 +15,7 @@ jobs:
     permissions:
       contents: read  # This is required for actions/checkout
 
-    steps:
+    steps:upd
       - uses: actions/checkout@v4
 
       - name: Set up Node.js version
@@ -73,5 +73,5 @@ jobs:
         with:
           app-name: 'fire-warden-app'
           slot-name: 'Production'
-          package: './server'  # The 'server' folder should be used during deployment
+          package: './server/'  # The 'server' folder should be used during deployment
           
