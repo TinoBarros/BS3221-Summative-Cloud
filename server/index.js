@@ -9,6 +9,17 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
+const poolPromise = new sql.ConnectionPool({
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    server: process.env.DB_SERVER,
+    database: process.env.DB_DATABASE,
+    options: {
+        encrypt: true,
+        trustServerCertificate: true
+    }
+}).connect();
+
 app.post('/clocking', async (req, res) => {
     try{
         const { staffNumber, firstName, lastName, workingLocation } = req.body;
