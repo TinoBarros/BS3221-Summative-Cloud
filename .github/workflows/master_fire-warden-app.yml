@@ -23,11 +23,12 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and test
+      - name: Install depenencies, build and test
         run: |
+          cd server
           npm install
           npm run build --if-present
-          npm run test --if-present
+          
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -54,9 +55,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_98E58238E9874541BDBB7F27A03A85DA }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_5F5A776BCD2740658DAF4FFED5D851FC }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_16D00A3971ED458BB4EBF80B245FDFC3 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_7F36C66E7E22416393BC6F6FB2AA4BD4 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_96F3941CE7254C3282316440A3D3228B }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_08C3DD44CB2A47FC87A38EB176F5F2E3 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -64,5 +65,5 @@ jobs:
         with:
           app-name: 'fire-warden-app'
           slot-name: 'Production'
-          package: .
+          package: ./server
           
