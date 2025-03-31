@@ -9,8 +9,9 @@ const config = {
     options: {
         encrypt: true,
         trustServerCertificate: false
-        requestTimeout: 30000
+        
     }
+    requestTimeout: 30000
 
 }
 
