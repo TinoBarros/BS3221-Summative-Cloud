@@ -13,6 +13,7 @@ const config = {
 
 }
 
+
 const poolPromise = new sql.ConnectionPool(config)
 .connect()
 .then(pool => {
