@@ -108,6 +108,7 @@ app.get('/edit/:id', async (req, res) => {
 })
 
 app.get('/locations', async (req,res) => {
+    console.log("test");
     try {
         const pool = await poolPromise
         const result = await pool.request().query('SELECT Name FROM locations')
