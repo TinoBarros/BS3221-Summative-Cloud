@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/locations")
+      .get("https://fire-warden-exbrf4d4gxe0cgc3.ukwest-01.azurewebsites.net/locations")
       .then((response) => {
 
         const options = response.data.map((item) => ({
@@ -53,7 +53,7 @@ function App() {
       return;
     }
 
-    axios.post('http://localhost:8080/clocking', {staffNumber: staffNumber, firstName: firstName, lastName: lastName, workingLocation: workingLocation})
+    axios.post('https://fire-warden-exbrf4d4gxe0cgc3.ukwest-01.azurewebsites.net/clocking', {staffNumber: staffNumber, firstName: firstName, lastName: lastName, workingLocation: workingLocation})
     .then((data) => {
       console.log(data)
       setStaffNumber('')
