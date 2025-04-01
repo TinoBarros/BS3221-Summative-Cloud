@@ -21,7 +21,7 @@ const Edit = () => {
     const [clockingTime, setClockingTime] = useState(new Date())
 
     useEffect(() => {
-      axios.get(`http://localhost:8080/edit/${clockingId}`)
+      axios.get(`https://fire-warden-exbrf4d4gxe0cgc3.ukwest-01.azurewebsites.net/edit/${clockingId}`)
       .then(response => {
         const data = response.data[0]
         setStaffNumber(data.staffNumber)
@@ -38,7 +38,7 @@ const Edit = () => {
 
     useEffect(() => {
       axios
-        .get("http://localhost:8080/locations")
+        .get("https://fire-warden-exbrf4d4gxe0cgc3.ukwest-01.azurewebsites.net/locations")
         .then((response) => {
   
           const options = response.data.map((item) => ({
@@ -68,7 +68,7 @@ const Edit = () => {
       return;
     }
 
-      axios.post('http://localhost:8080/update', 
+      axios.post('https://fire-warden-exbrf4d4gxe0cgc3.ukwest-01.azurewebsites.net/update', 
         {clockingId: clockingId, 
         staffNumber: staffNumber,
         firstName: firstName,

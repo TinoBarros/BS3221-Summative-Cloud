@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     useEffect(() => {
       axios
-        .get("http://localhost:8080/clockings")
+        .get("https://fire-warden-exbrf4d4gxe0cgc3.ukwest-01.azurewebsites.net/clockings")
         .then((response) => {
           setClockings(response.data)
         })
@@ -77,7 +77,7 @@ const Dashboard = () => {
 
     const deleteHandler = () => {
       if (selected) {
-      axios.post('http://localhost:8080/delete', { clockingId: selected })
+      axios.post('https://fire-warden-exbrf4d4gxe0cgc3.ukwest-01.azurewebsites.net/delete', { clockingId: selected })
       .then(() => {
         setClockings(clockings.filter(clocking => clocking.clockingId !== selected))
         setSelected(null)
