@@ -82,12 +82,12 @@ function App() {
 
   const Sidebar = () => {
     return (
-      <div className="w-64 border border-black bg-[#552d67] text-white p-4 h-screen">
+      <div className="w-64 border border-black bg-[#7c2181] text-white p-4 h-screen">
         <h2 className="text-xl font-bold">Fire Warden System</h2>
         <ul className="mt-4 space-y-2">
-          <Link className="block p-2 hover:bg-[#452354] rounded" to="/dashboard">Dashboard</Link>
-          <Link className="block p-2 hover:bg-[#452354] rounded" to="/">Clock In</Link>
-          <Link className="block p-2 hover:bg-[#452354] rounded" to="/locations">Locations</Link>
+          <Link className="block p-2 hover:bg-[#651a69] rounded" to="/dashboard">Dashboard</Link>
+          <Link className="block p-2 hover:bg-[#651a69] rounded" to="/">Clock In</Link>
+          <Link className="block p-2 hover:bg-[#651a69] rounded" to="/locations">Locations</Link>
         </ul>
       </div>
     );
@@ -96,7 +96,7 @@ function App() {
   const SubmitButton = () => {
     return (
       <div className='flex, py-10'>
-        <button className='px-10 py-1 rounded-sm bg-[#552d67] hover:bg-[#452354] text-white'type='submit'>
+        <button className='px-10 py-1 rounded-sm bg-[#7c2181] hover:bg-[#651a69] text-white'type='submit'>
           Submit
         </button>
       </div>
@@ -115,7 +115,7 @@ function App() {
           </div>
           <div className="actions">
             <button 
-              className="px-5 py-1 rounded-sm bg-[#552d67] hover:bg-[#452354] text-white"
+              className="px-5 py-1 rounded-sm bg-[#7c2181] hover:bg-[#651a69] text-white"
               onClick={() => { close(); setFormSubmitted(false); }}
             >
               Back

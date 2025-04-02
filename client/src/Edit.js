@@ -139,8 +139,8 @@ const Edit = () => {
                       onChange={setClockingTime}
                       value={clockingTime} />
                       <div className='flex py-5 justify-between w-full'>
-                      <Link className="px-12 py-1 rounded-sm bg-[#552d67] hover:bg-[#452354] text-white" to="/dashboard">Back</Link>
-                      <button className='px-10 py-1 rounded-sm bg-[#552d67] hover:bg-[#452354] text-white'type='submit'>
+                      <Link className="px-12 py-1 rounded-sm bg-[#7c2181] hover:bg-[#651a69] text-white" to="/dashboard">Back</Link>
+                      <button className='px-10 py-1 rounded-sm bg-[#7c2181] hover:bg-[#651a69] text-white'type='submit'>
                         Update
                       </button>
 

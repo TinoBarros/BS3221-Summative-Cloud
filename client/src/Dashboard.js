@@ -46,8 +46,8 @@ const Dashboard = () => {
               variant='contained' 
               disabled={!selected} 
               sx={{
-                backgroundColor: '#552d67',
-                '&:hover' : {backgroundColor: '#452354'}
+                backgroundColor: '#7c2181',
+                '&:hover' : {backgroundColor: '#651a69'}
               }}
             >
              Edit
@@ -65,8 +65,8 @@ const Dashboard = () => {
               disabled={!selected} 
               onClick={deleteHandler}
               sx={{
-                backgroundColor: '#552d67',
-                '&:hover' : {backgroundColor: '#452354'}
+                backgroundColor: '#7c2181',
+                '&:hover' : {backgroundColor: '#651a69'}
               }}
             >
              Delete
@@ -125,9 +125,9 @@ const Dashboard = () => {
                     checked={selected === row.clockingId} 
                     onChange={() => selectHandler(row.clockingId)}
                     sx={{
-                      color: '#552d67',
+                      color: '#7c2181',
                       '&.Mui-checked': {
-                        color: '#552d67'
+                        color: '#651a69'
                       }
                     }} /></TableCell>
                 <TableCell component="th" scope="row">{row.staffNumber}</TableCell>
