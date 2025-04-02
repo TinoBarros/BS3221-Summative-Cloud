@@ -56,7 +56,7 @@ const Edit = () => {
 
     const submitHandler = e => {
       e.preventDefault();
-    if (!staffNumber.trim() || !firstName.trim() || !lastName.trim() || !workingLocation.trim() || !clockingTime) {
+    if (!staffNumber || !firstName || !lastName || !workingLocation || !clockingTime) {
       alert("Please fill in all required fields.");
       setFormSubmitted(false);
       return;
@@ -115,7 +115,7 @@ const Edit = () => {
                   Clocking record has been successfully updated.
                 </div>
                 <div className="actions">
-                <Link className="block text-white p-2 bg-[#552d67] hover:bg-[#452354] rounded" to="/dashboard">Back To Dashboard</Link>
+                <Link className="block text-white p-2 bg-[#7c2181] hover:bg-[#651a69] rounded" to="/dashboard">Back To Dashboard</Link>
                 </div>
               </div>
             )}
