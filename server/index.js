@@ -104,7 +104,7 @@ app.get('/locations', async (req,res) => {
     console.log("test");
     try {
         const pool = await poolPromise
-        const result = await pool.request().query('SELECT Name FROM locations')
+        const result = await pool.request().query('SELECT Name, fireWardensNeeded FROM locations')
         res.json(result.recordset)
     } catch (err) {
         console.error(err)
