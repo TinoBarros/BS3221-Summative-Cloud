@@ -4,5 +4,5 @@
 
 - There is no login, so credentials are not needed to enter the application.
 
-- use the link to access the azure static web app 
+- use the link to access the Azure Static Web App 
 [here](https://kind-bay-0a1d6f303.6.azurestaticapps.net/)
