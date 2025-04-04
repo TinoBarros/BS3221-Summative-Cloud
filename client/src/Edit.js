@@ -87,7 +87,7 @@ const Edit = () => {
     }
 
     const LocationPicklist = () => (
-      
+      <div className="w-full h-8 mb-6">
         <Select isSearchable='true' options={picklistOptions} value={picklistOptions.find(option => option.value === workingLocation)} 
         onChange={(selectedOption) => setWorkingLocation(selectedOption.value)} 
         styles={{
@@ -101,6 +101,7 @@ const Edit = () => {
             }
           })
         }} />
+      </div>
       )
 
     return(
@@ -123,8 +124,9 @@ const Edit = () => {
           <div className='flex'>
   <div className='flex-1 bg-gray-100 p-8'>
                   <form onSubmit={submitHandler}>
-                    <h3 className='text-5xl text-center text-black'>Edit</h3>
-                    <div className='mx-auto p-6 md:p-12 w-full max-w-md border-purple-400 mt-0'>
+                  <h3 className='px-10 mb-1 text-5xl text-center text-black'>Edit</h3>
+                  <div className='mb-4 text-black text-center'>Amend details for an existing clocking.</div>
+                    <div className='mx-auto px-4 py-2 md:px-6 md:py-4 w-full max-w-md border-purple-400 mt-0'>
                       <label className='block mb-1 text-xl text-black' htmlFor='staffNumber'>Staff Number</label>
                       <input className='w-full h-8 p-1 mb-6 border border-black outline-none hover:bg-gray-100 rounded' id='staffNumber' type='text' value={staffNumber} onChange={(e) => setStaffNumber(e.target.value.replace(/\D/g, ''))} />
                       <label className='block mb-1 text-xl text-black' htmlFor='firstName'> First Name</label>
@@ -138,7 +140,7 @@ const Edit = () => {
                       className="w-full"
                       onChange={setClockingTime}
                       value={clockingTime} />
-                      <div className='flex py-5 justify-between w-full'>
+                      <div className='flex py-2 justify-between w-full'>
                       <Link className="px-12 py-1 rounded-sm bg-[#7c2181] hover:bg-[#651a69] text-white" to="/dashboard">Back</Link>
                       <button className='px-10 py-1 rounded-sm bg-[#7c2181] hover:bg-[#651a69] text-white'type='submit'>
                         Update

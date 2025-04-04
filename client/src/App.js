@@ -83,7 +83,7 @@ function App() {
   const Sidebar = () => {
     return (
       <div className="w-64 border border-black bg-[#7c2181] text-white p-4 h-screen">
-        <h2 className="text-xl font-bold">Fire Warden System</h2>
+        <h2 className="text-xl font-bold border-b-2 border-white pb-1">Fire Warden System</h2>
         <ul className="mt-4 space-y-2">
           <Link className="block p-2 hover:bg-[#651a69] rounded" to="/dashboard">Dashboard</Link>
           <Link className="block p-2 hover:bg-[#651a69] rounded" to="/">Clock In</Link>
@@ -133,7 +133,8 @@ function App() {
         <Routes>
           <Route path="/" element={
             <form onSubmit={submitHandler}>
-              <h3 className='pb-6 text-5xl text-center text-black'>Clock In</h3>
+              <h3 className='px-10 mb-2 pb-2 text-5xl text-center text-black'>Clock In</h3>
+              <div className='pb-2 text-black text-center'>Regiser a clocking on the Fire Warden System.</div>
               <div className='mx-auto p-9 md:p-12 w-full max-w-md border-purple-400 mt-0'>
                 <label className='block mb-1 text-xl text-black' htmlFor='staffNumber'>Staff Number</label>
                 <input className='w-full h-8 p-1 mb-6 border border-black outline-none hover:bg-gray-100 rounded' id='staffNumber' type='text'value={staffNumber} onChange={(e) => setStaffNumber(e.target.value.replace(/\D/g, ''))} />

@@ -37,7 +37,7 @@ const Dashboard = () => {
 
     const EditButton = ({ selected }) => {
       return (
-        <div className='flex justify-end py-10'>
+        <div className='flex justify-end py-3'>
           <Link
             to={selected ? `/edit/${selected}` : '#'}
             style={{textDecordation: 'none'}}
@@ -59,7 +59,7 @@ const Dashboard = () => {
 
     const DeleteButton = ({ selected }) => {
       return (
-        <div className='flex justify-end py-10'>
+        <div className='flex justify-end py-3'>
             <Button
               variant='contained' 
               disabled={!selected} 
@@ -100,10 +100,11 @@ const Dashboard = () => {
 
     return(
       <div>
-        <h3 className='px-10 mb-10 pb-6 text-5xl text-center text-black'>Dashboard</h3>
+        <h3 className='px-10 mb-2 pb-2 text-5xl text-center text-black'>Dashboard</h3>
+        <div className='pb-10 text-black text-center'>View all warden clockings for today in one place.</div>
       <div>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{maxHeight: '80vh', overflow: 'auto'}} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Select</TableCell>

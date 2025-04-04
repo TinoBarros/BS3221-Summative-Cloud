@@ -75,7 +75,7 @@ app.post('/delete', async (req, res) => {
 app.get('/clockings', async (req,res) => {
    try{
     const pool = await poolPromise;
-    const result = await pool.request().query('SELECT * FROM clocking')
+    const result = await pool.request().query('SELECT * FROM clocking WHERE CAST(clockingTime as DATE) = CAST(GETDATE() AS DATE)') 
     res.json(result.recordset)
    } catch (err) {
     console.log(err)
@@ -104,7 +104,7 @@ app.get('/locations', async (req,res) => {
     console.log("test");
     try {
         const pool = await poolPromise
-        const result = await pool.request().query('SELECT l.locationId, l.Name, l.fireWardensNeeded, COUNT(c.clockingId) AS clockingCount From locations l LEFT JOIN clocking c ON LTRIM(RTRIM(LOWER(c.workingLocation))) = LTRIM(RTRIM(LOWER(l.Name))) GROUP BY l.locationId, l.Name, l.fireWardensNeeded')
+        const result = await pool.request().query('SELECT l.locationId, l.Name, l.fireWardensNeeded, COUNT(c.clockingId) AS clockingCount From locations l LEFT JOIN clocking c ON LTRIM(RTRIM(LOWER(c.workingLocation))) = LTRIM(RTRIM(LOWER(l.Name))) AND CAST(c.clockingTime AS DATE) = CAST(GETDATE() AS DATE) GROUP BY l.locationId, l.Name, l.fireWardensNeeded')
         res.json(result.recordset)
     } catch (err) {
         console.error(err)

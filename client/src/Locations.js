@@ -33,7 +33,8 @@ const Locations = () => {
     return(
       <>
       <div>
-        <h3 className=' pb-6 text-5xl text-center text-black'>Locations</h3>
+        <h3 className='px-10 mb-2 pb-2 text-5xl text-center text-black'>Locations</h3>
+        <div className='pb-5 text-black text-center'>View all available locations and see the number of wardens assigned to each one for today.</div>
       </div>
       <div className="py-5 flex flex-wrap gap-4 ">
         {locationNames.map((location, id) => (
