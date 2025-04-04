@@ -4,5 +4,5 @@
 
 - There is no login, so credentials are not needed to enter the application.
 
-- To Access the web app, click the link here, 
+- To Access the web app, click the link here: 
   [Access web app](https://kind-bay-0a1d6f303.6.azurestaticapps.net/)
