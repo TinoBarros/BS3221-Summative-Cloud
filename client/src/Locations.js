@@ -19,6 +19,7 @@ const Locations = () => {
           value: item.Name,
           label: item.Name,
           fireWardensNeeded: item.fireWardensNeeded,
+          clockingCount: item.clockingCount || 0,
         }));
   
         const uniqueOptions = Array.from(new Map(options.map(item => [item.value, item])).values());
@@ -36,7 +37,7 @@ const Locations = () => {
       </div>
       <div className="py-5 flex flex-wrap gap-4 ">
         {locationNames.map((location, id) => (
-          <div key={id} className="py-3 bg-gray-200 rounded-lg text-center border border-black flex-1 min-w-[22%] sm:min-w-[30%] md:min-w-[22%] lg:min-w-[22%]">{location.label} | {location.fireWardensNeeded} </div>
+          <div key={id} className="py-3 bg-gray-200 rounded-lg text-center border border-black flex-1 min-w-[22%] sm:min-w-[30%] md:min-w-[22%] lg:min-w-[22%]">{location.label} | {location.clockingCount} </div>
         ))}
       </div>
     </>

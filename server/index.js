@@ -104,7 +104,7 @@ app.get('/locations', async (req,res) => {
     console.log("test");
     try {
         const pool = await poolPromise
-        const result = await pool.request().query('SELECT Name, fireWardensNeeded FROM locations')
+        const result = await pool.request().query('SELECT l.locationId, l.Name, l.fireWardensNeeded, COUNT(c.clockingId) AS clockingCount From locations l LEFT JOIN clocking c ON LTRIM(RTRIM(LOWER(c.workingLocation))) = LTRIM(RTRIM(LOWER(l.Name))) GROUP BY l.locationId, l.Name, l.fireWardensNeeded')
         res.json(result.recordset)
     } catch (err) {
         console.error(err)
