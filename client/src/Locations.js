@@ -37,7 +37,14 @@ const Locations = () => {
       </div>
       <div className="py-5 flex flex-wrap gap-4 ">
         {locationNames.map((location, id) => (
-          <div key={id} className="py-3 bg-gray-200 rounded-lg text-center border border-black flex-1 min-w-[22%] sm:min-w-[30%] md:min-w-[22%] lg:min-w-[22%]">{location.label} | {location.clockingCount} </div>
+          <div key={id}
+           className="py-3 px-4 bg-gray-200 rounded-lg text-center border border-black flex-1 min-w-[22%] sm:min-w-[30%] md:min-w-[22%] lg:min-w-[22%] flex justify-between items-center">
+            <span>{location.label} | {location.clockingCount}</span>
+            <span className={` w-3 h-3 rounded-full ${
+              location.clockingCount === 0 ? 'bg-red-500' : 'bg-green-500'
+            }`}>
+            </span>
+             </div>
         ))}
       </div>
     </>
