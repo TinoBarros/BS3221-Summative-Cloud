@@ -1,4 +1,4 @@
-## Fire Warden App for BS3221 Developing for the Cloud ##
+## Fire Warden App - BS3221 Developing for the Cloud ##
 
 - Connection to the Azure database may take a couple of minutes to connect on cold startup. If neccessary, please refresh after a short while.
 
